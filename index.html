@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mortuza | Animated Portfolio</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background:white;
+    transition: background 1s ease;
+    overflow-x:hidden;
+}
+
+body.dark{
+    background:#0f0f1a;
+}
+
+section{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    padding:50px;
+}
+
+/* ================= HERO SECTION ================= */
+
+.hero{
+    background: url("file:///C:/jj/c.png") no-repeat center center/cover;
+    position:relative;
+}
+
+/* Overlay for better text visibility */
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.4);
+}
+
+.hero h1{
+   position:absolute;
+    top:80px;
+    left:80px;
+    font-size:50px;
+    color:white;
+    z-index:2;
+}
+
+.hero p{
+   position:absolute;
+    top:150px;
+    left:80px;
+    color:white;
+    z-index:2;
+}
+
+/* ================= CARDS ================= */
+
+.card{
+    width:70%;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(20px);
+    border-radius:25px;
+    padding:40px;
+    margin:50px 0;
+    color:white;
+    opacity:0;
+    transform:translateX(100px);
+    transition: all 1s ease;
+}
+
+.card.left{
+    transform:translateX(-100px);
+}
+
+.card.show{
+    opacity:1;
+    transform:translateX(0);
+}
+
+.dark .card{
+    background:rgba(255,255,255,0.08);
+}
+
+/* ================= ROUND BACKGROUND EFFECT ================= */
+
+.rounded-bg{
+    position:fixed;
+    width:600px;
+    height:600px;
+    background:radial-gradient(circle, #6a00ff, #000);
+    border-radius:50%;
+    top:-200px;
+    right:-200px;
+    z-index:-1;
+    filter:blur(100px);
+    transition:1s;
+}
+
+body.dark .rounded-bg{
+    top:-100px;
+    right:-100px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="rounded-bg"></div>
+
+<section class="hero">
+    <h1>Mortuza Nasir
+</h1>
+    <p>Scroll Down for know me ↓</p>
+</section>
+
+<section>
+    <div class="card left">
+        <h2>About Me</h2>
+        <p><ol type="A""><li>Worked at dbcnews.tv</li>  
+            <li>Studied at Adamjee Cantonment College</li>
+            <li>Studied at Daffodil International University</li>
+        </ol></p>
+    </div>
+
+    <div class="card">
+        <h2>Form </h2>
+        <p>Mirpur, Dhaka, Bangladesh
+.</p>
+    </div>
+
+    <div class="card left">
+        <h2>Skills</h2>
+        <p><ol type="1">
+            <li>Report Writing</li>
+            <li>Investigative Skills</li>
+            <li>Computer and Hardware Knowledge</li>
+            <li>Data Analysis</li>
+        </ol></p>
+    </div>
+</section>
+
+<script>
+const cards = document.querySelectorAll(".card");
+
+window.addEventListener("scroll", () => {
+
+    // Dark mode trigger
+    if(window.scrollY > 100){
+        document.body.classList.add("dark");
+    } else {
+        document.body.classList.remove("dark");
+    }
+
+    // Card animation
+    cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        const triggerPoint = window.innerHeight - 100;
+
+        if(cardTop < triggerPoint){
+            card.classList.add("show");
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>
